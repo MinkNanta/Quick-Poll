@@ -1,0 +1,7 @@
+border-2 border-main1
+
+
+import { PrimarySmall } from "../Elements/button";
+
+import logo200Image from "../../assets/img/logo_200.png";
+<img src={logo200Image} alt="" />
