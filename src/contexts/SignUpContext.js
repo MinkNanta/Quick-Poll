@@ -1,16 +1,21 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
-const SignUpContext = createContext();
+const AuthContext = createContext();
 
-function SignUpContextProvider(children) {
-  const [userStatus, setUserStatus] = useState("STEP1");
+function AuthContextProvider({ children }) {
+  const [user, setUser] = useState(false);
 
   return (
-    <SignUpContext.Provider value={{ userStatus, setUserStatus }}>
+    <AuthContext.Provider value={{ user, setUser }}>
       {children}
-    </SignUpContext.Provider>
+    </AuthContext.Provider>
   );
 }
 
-export default SignUpContextProvider;
-export { SignUpContext };
+function useAuth() {
+  const ctx = useContext(AuthContext);
+  return ctx;
+}
+
+export default AuthContextProvider;
+export { useAuth, AuthContext };

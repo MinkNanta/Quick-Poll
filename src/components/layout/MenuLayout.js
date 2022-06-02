@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "../header/Header";
-function AuthLayout() {
+function MenuLayout() {
   return (
     <>
       <Header />
@@ -10,4 +10,4 @@ function AuthLayout() {
   );
 }
 
-export { AuthLayout };
+export { MenuLayout };

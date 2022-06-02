@@ -1,8 +1,12 @@
 import React from "react";
-import SignUpFrom from "../components/signUpForm/SignUpFrom";
+import SignInContainer from "../components/signin/SignInContainer";
 
 function SignIn() {
-  return <>{/* <SignUpFrom /> */}</>;
+  return (
+    <>
+      <SignInContainer />
+    </>
+  );
 }
 
 export default SignIn;

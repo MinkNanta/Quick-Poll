@@ -1,17 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
+import { useAuth } from "../../contexts/SignUpContext";
 
 export default function Header() {
+  const { user, setUser } = useAuth();
+
   const navItemsLeft = [
     { id: 1, to: "/", name: "Poll" },
     { id: 2, to: "/pricing", name: "Pricing" },
     { id: 3, to: "/outside", name: "Buy me a coffee" },
   ];
-  const navItemsRight = [
+  const ItemsGust = [
     { id: 4, to: "/about", name: "About us" },
     { id: 5, to: "/signin", name: "Sign in" },
   ];
+
+  const ItemsAuth = [
+    { id: 4, to: "/about", name: "About us" },
+    { id: 5, to: "/profile", name: "Profile" },
+  ];
+
+  const navItemsRight = user ? ItemsAuth : ItemsGust;
 
   return (
     <div className="boxShadow">
@@ -26,15 +36,24 @@ export default function Header() {
         <div className="m-auto">
           <img src={logo} alt="logo" />
         </div>
-        <div className="menuList">
-          {navItemsRight.map(({ id, to, name }) => (
-            <Link key={id} className="menuItem" to={to}>
-              {name}
-            </Link>
-          ))}
-          <Link type="button" className="primarySmall" to="/signup">
-            sign up
+        {navItemsRight.map(({ id, to, name }) => (
+          <Link key={id} className="menuItem" to={to}>
+            {name}
           </Link>
+        ))}
+
+        <div className="menuList">
+          {!user && (
+            <Link type="button" className="primarySmall" to="/signup">
+              sign up
+            </Link>
+          )}
+
+          {user && (
+            <button onClick={() => setUser(false)}>
+              <p>sign out</p>
+            </button>
+          )}
         </div>
       </div>
     </div>

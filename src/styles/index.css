@@ -9,8 +9,9 @@
 
 body {
   margin: 0;
-  font-family: poppins;
+  font-family: poppins, Prompt;
   background-color: var(--background-color);
+  box-sizing: border-box;
 }
 
 /* -------- container ------ */
@@ -47,11 +48,18 @@ body {
 @layer components {
   /* --- Container */
   .box {
-    @apply border border-t_main mx-auto;
+    /* @apply border border-t_main; */
   }
 
   .mainContainer {
     @apply max-w-7xl px-8 pb-20 mx-auto;
+  }
+  .containerM {
+    @apply max-w-3xl mx-auto py-4;
+  }
+
+  .autoLayoutCol {
+    @apply flex  place-items-center;
   }
 
   /* --- common */
@@ -82,5 +90,18 @@ body {
   /* --- button */
   .primarySmall {
     @apply bg-main px-5 py-2 text-base  text-t_support rounded-2xl hover:text-t_main;
+  }
+
+  .link {
+    @apply text-base text-t_link hover:text-t_main;
+  }
+  .dashedButton {
+    @apply w-full py-3 mt-6 rounded-lg border border-t_label  text-t_label border-dashed cursor-pointer hover:text-t_main
+    hover:border-t_main;
+  }
+
+  /* ------- text header styles */
+  .bigTitle {
+    @apply text-left pt-20;
   }
 }
