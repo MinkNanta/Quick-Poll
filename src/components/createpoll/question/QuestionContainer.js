@@ -7,10 +7,8 @@ export default function QuestionContainer() {
     {
       id: "1",
       title: "1",
-      option1: "rounder",
-      option2: "border black",
-      option1_img: "",
-      option2_img: "",
+      option: "rounder",
+      option_img: "",
     },
     {
       id: "2",
@@ -48,7 +46,7 @@ export default function QuestionContainer() {
   };
 
   return (
-    <div>
+    <div className="space-y-10">
       {questionObj.map((ques, index) => (
         <QuestionFrom ques={ques} index={index} handleRemove={handleRemove} />
       ))}

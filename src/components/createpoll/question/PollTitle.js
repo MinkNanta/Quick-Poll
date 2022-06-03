@@ -10,8 +10,9 @@ export default function PollTitle() {
       <InputBigText placeholder="What is poll about?" />
       <button className="link">+ Add Category</button>
       <UploadPhoto
+        scr={thumbnail}
+        classNameInput="h-64"
         detail="SVG, PNG, JPG or GIF (MAX. 800x400px)"
-        photo={thumbnail}
         onClose={() => {
           setThumbnail(null);
         }}
