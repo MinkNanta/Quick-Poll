@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from "react";
-import Input from "../../from/Input";
-import { BeakerIcon } from "@heroicons/react/solid";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../../contexts/SignUpContext";
+import { useAuth } from "../../../contexts/AuthContext";
 import AuthServices from "../../authservices/AuthServices";
+import Form from "../../from/Form";
+import InputYup from "../../from/InputYup";
+import SubmitButton from "../../from/SubmitButton";
+import * as yup from "yup";
 
 export default function SignInFrom() {
-  const { user, setUser } = useAuth();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { signIn } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmitSignIn = async (e) => {
+  const isEmail = yup.object({
+    email: yup.string().required().email(),
+    password: yup.string().required(),
+  });
+
+  const handleSubmitSignIn = async ({ email, password }) => {
     try {
-      e.preventDefault();
-      // if (!validator.isEmail(email)) {
-      //   return console.log("not email");
-      // }
-      setUser(true);
+      const body = { email: email, password: password };
+      await signIn(body);
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -28,28 +30,36 @@ export default function SignInFrom() {
     <>
       <h2 className="bigTitle">So glad you're here!</h2>
 
-      <form className="flex flex-col gap-y-6" onSubmit={handleSubmitSignIn}>
-        <Input
+      <Form schema={isEmail} className="flex flex-col gap-y-6">
+        <InputYup
+          name="email"
+          type="email"
           label="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email"
         />
-        <Input
+        <InputYup
+          name="password"
+          type="password"
           label="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Your password"
+          placeholder="Enter your password"
         />
-        <Link to="/resetpassword">Reset password</Link>
-        <button type="submit" className="primarySmall">
-          Sign in
-        </button>
-        <AuthServices />
-        <h6 className="text-center">
-          Don’t have account? <Link to="/signUp"> sign up </Link>
-        </h6>
-      </form>
+        <SubmitButton onClick={handleSubmitSignIn}>Sign in</SubmitButton>
+      </Form>
+
+      <Link
+        to="/resetpassword"
+        className="text-[14px] text-t_support opacity-60 hover:opacity-80"
+      >
+        Reset password
+      </Link>
+      <AuthServices />
+      <h6 className="text-center">
+        Don’t have account?{" "}
+        <Link className="text-blue_sup" to="/signUp">
+          {" "}
+          sign up{" "}
+        </Link>
+      </h6>
     </>
   );
 }

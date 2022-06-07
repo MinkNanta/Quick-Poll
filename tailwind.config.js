@@ -31,6 +31,7 @@ module.exports = {
       blue_sup: "#2093FD",
       success: "#6BCA85",
       danger: "#CF3881",
+      buttonHover: "rgba(82, 72, 181, 0.1)",
     },
     extend: {
       boxShadow: {

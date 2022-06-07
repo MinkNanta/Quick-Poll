@@ -9,25 +9,24 @@ import { MenuLayout } from "../components/layout/MenuLayout";
 import AboutUs from "../pages/AboutUs";
 import CreatePassword from "../components/signup/signupform/CreatePassword";
 import CreatePoll from "../pages/CreatePoll";
+import SharePoll from "../pages/feedback/SharePoll";
+import ViewPoll from "../pages/ViewPoll";
 
 export default function Router() {
-  // const user = false;
   return (
     <Routes>
       <Route path="/" element={<MenuLayout />}>
         <Route path="" element={<Home />} />
-        {/* {!user && (
-          <> */}
         <Route path="SignIn" element={<SignIn />} />
         <Route path="SignUp" element={<SignUp />} />
-        {/* </>
-        )} */}
         <Route path="Pricing" element={<Pricing />} />
         <Route path="Explore" element={<Explore />} />
         <Route path="about" element={<AboutUs />} />
+        <Route path="poll/completed/:id" element={<SharePoll />} />
+        <Route path="poll/:id" element={<ViewPoll />} />
       </Route>
 
-      <Route path="/createPoll" element={<CreatePoll />} />
+      <Route path="/poll/create" element={<CreatePoll />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

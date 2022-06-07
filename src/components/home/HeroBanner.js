@@ -18,10 +18,10 @@ function HeroBanner() {
             Easily surveys help your brand driving engagement
           </h6>
           <button
-            className="primarySmall"
-            onClick={() => navigate("/createPoll")}
+            className="primaryMd"
+            onClick={() => navigate("/poll/create")}
           >
-            Make A Quick Vote
+            Make A Quick Poll
           </button>
         </div>
         <div className="mx-auto p-4">

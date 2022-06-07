@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import InputBigText from "../../from/InputBigText";
 import UploadPhoto from "../../from/UploadPhoto";
 
-export default function PollTitle() {
+export default function PollTitle({ value, onChange, error }) {
   const [thumbnail, setThumbnail] = useState(null);
 
   return (
-    <div>
-      <InputBigText placeholder="What is poll about?" />
+    <div className="space-y-3">
+      <InputBigText
+        placeholder="What is poll about?"
+        value={value}
+        onChange={onChange}
+        error={error}
+      />
       <button className="link">+ Add Category</button>
       <UploadPhoto
         scr={thumbnail}

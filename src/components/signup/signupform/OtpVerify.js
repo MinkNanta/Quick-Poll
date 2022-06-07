@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import * as yup from "yup";
-import { useAuth } from "../../../contexts/SignUpContext";
-import AuthServices from "../../authservices/AuthServices";
+
 import Form from "../../from/Form";
 import InputYup from "../../from/InputYup";
 import SubmitButton from "../../from/SubmitButton";

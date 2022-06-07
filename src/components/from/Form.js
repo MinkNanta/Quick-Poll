@@ -5,7 +5,6 @@ export default function Form({
   defaultValues = {},
   children,
   schema,
-  style,
   className,
 }) {
   const methods = useForm({
@@ -15,9 +14,7 @@ export default function Form({
 
   return (
     <FormProvider {...methods}>
-      <div className={className} style={style}>
-        {children}
-      </div>
+      <div className={className}>{children}</div>
     </FormProvider>
   );
 }

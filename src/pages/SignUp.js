@@ -3,7 +3,7 @@ import SignUpContainer from "../components/signup/SignUpContainer";
 
 function SignUp() {
   return (
-    <div className="mainContainer box">
+    <div className="mainContainer ">
       <SignUpContainer />
     </div>
   );

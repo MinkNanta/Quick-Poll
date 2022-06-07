@@ -1,14 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import * as yup from "yup";
-import { useAuth } from "../../../contexts/SignUpContext";
+import { useAuth } from "../../../contexts/AuthContext";
 import Form from "../../from/Form";
 import InputYup from "../../from/InputYup";
 import SubmitButton from "../../from/SubmitButton";
 
-export default function CreatePassword({ setPassword }) {
+export default function CreatePassword({ setPassword, userEmail }) {
   // ------ Auth user --------
-  const { user, setUser } = useAuth();
+  const { signUp } = useAuth();
 
   // ------ navigate --------
   const navigate = useNavigate();
@@ -31,10 +31,10 @@ export default function CreatePassword({ setPassword }) {
 
   // ------ Handle Click --------
 
-  const handleSubmitPassword = async ({ password }) => {
+  const handleSubmitPassword = async ({ password, confirmPassword }) => {
     try {
-      await setPassword(password);
-      setUser(true);
+      const body = { email: userEmail, password: password, confirmPassword };
+      await signUp(body);
       navigate("/?firstTime=true");
     } catch (error) {
       console.log(error);

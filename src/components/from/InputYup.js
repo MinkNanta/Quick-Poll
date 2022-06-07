@@ -1,7 +1,7 @@
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
-function InputYup({ name, type, placeholder, label }) {
+function InputYup({ name, type, placeholder, label, apiError }) {
   const {
     control,
     formState: { errors },
@@ -16,16 +16,14 @@ function InputYup({ name, type, placeholder, label }) {
           return (
             <div>
               <label htmlFor={name} className="block">
-                <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                  {label}
-                </span>
+                <span className="inputLabel ">{label}</span>
                 <input
                   type={type}
                   name={name}
                   onChange={onChange}
                   value={value}
                   placeholder={placeholder}
-                  className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                  className="mainInput"
                 />
               </label>
               {errors[name] && (
@@ -33,6 +31,22 @@ function InputYup({ name, type, placeholder, label }) {
                   {errors[name].message}
                 </p>
               )}
+              {apiError && (
+                <p className="pt-1 text-[14px] leading-5 text-danger">
+                  Email is already exists
+                </p>
+              )}
+              {/* {errors[name] ? (
+                <p className="pt-1 text-[14px] leading-5 text-danger">
+                  {errors[name].message}
+                </p>
+              ) : { apiError } ? (
+                <p className="pt-1 text-[14px] leading-5 text-danger">
+                  Email is already exists
+                </p>
+              ) : (
+                <></>
+              )} */}
             </div>
           );
         }}

@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import { TrashIcon, ChevronDownIcon } from "@heroicons/react/outline";
 
-export default function DropDown() {
+export default function DropDown({ name, value, onClickTime }) {
   const [open, setOpen] = useState();
   const [time, setTime] = useState("30s");
   return (
     <div className="flex place-item-center space-x-3">
       <p>Time left:</p>
-      <div class="relative inline-block text-left">
+      <div className="relative inline-block text-left">
         <button
           type="button"
-          class="flex pr-3 pl-5 text-base text-t_support focus:outline-none bg-main rounded-full w-24 text-right place-content-center"
-          aria-expanded="true"
-          aria-haspopup="true"
+          className="flex pr-3 pl-5 text-base text-t_support focus:outline-none bg-main rounded-full w-24 text-right place-content-center"
           id="menu-button"
           onClick={() => setOpen((p) => !p)}
         >
@@ -23,35 +21,29 @@ export default function DropDown() {
 
         {open ? (
           <div
-            class="origin-top-right absolute right-0 mt-2 rounded-md shadow-lg bg-bg_main focus:outline-none w-full "
+            className="origin-top-right absolute right-0 mt-2 rounded-md shadow-lg bg-bg_main focus:outline-none w-full "
             role="menu"
-            aria-orientation="vertical"
-            aria-labelledby="menu-button"
-            tabindex="-1"
           >
-            <div class="py-1" role="none">
+            <div className="py-1" role="none">
               <ul>
                 <li
-                  class="text-t_support text-base px-5 hover:bg-main py-1"
-                  tabindex="-1"
-                  id="30s"
-                  onClick={(e) => setTime(e.target.id)}
+                  className="text-t_support text-base px-5 hover:bg-main py-1"
+                  value="30s"
+                  onClick={onClickTime}
                 >
                   30s
                 </li>
                 <li
-                  class="text-t_support text-base px-5 hover:bg-main py-1"
-                  tabindex="-1"
+                  className="text-t_support text-base px-5 hover:bg-main py-1"
                   id="60s"
-                  onClick={(e) => setTime(e.target.id)}
+                  onClick={onClickTime}
                 >
                   60s
                 </li>
                 <li
-                  class="text-t_support text-base px-5 hover:bg-main py-1"
-                  tabindex="-1"
+                  className="text-t_support text-base px-5 hover:bg-main py-1"
                   id="120s"
-                  onClick={(e) => setTime(e.target.id)}
+                  onClick={onClickTime}
                 >
                   120s
                 </li>

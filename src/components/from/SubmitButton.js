@@ -6,7 +6,7 @@ const SubmitButton = ({ onClick, children, disabled = false, style }) => {
   return (
     <button
       // disabled={disabled}
-      className="primarySmall"
+      className="primaryMd"
       onClick={handleSubmit((data) => {
         onClick(data, reset);
       })}

@@ -10,7 +10,6 @@ export default function UploadPhoto({
   classNameInput,
 }) {
   const uploadEL = useRef();
-  console.log(classNameInput);
 
   return (
     <>

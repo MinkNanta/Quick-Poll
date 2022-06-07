@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import Tootip from "../common/Tootip";
 
 export default function AuthServices() {
+  const [open, setOpen] = useState(true);
+
   return (
     <>
       <div className="flex items-center gap-2">
@@ -10,9 +13,14 @@ export default function AuthServices() {
         </div>
         <div className="divide align-center"></div>
       </div>
-
-      <button className="primarySmall">Signup with Google</button>
-      <button className="primarySmall">Signup with Facebook</button>
+      <div className="group relative">
+        <button className="primaryMd w-full">Signup with Google</button>
+        <Tootip title="Soon!" />
+      </div>
+      <div className="group relative">
+        <button className="primaryMd w-full">Signup with Facebook</button>
+        <Tootip title="Soon!" />
+      </div>
     </>
   );
 }

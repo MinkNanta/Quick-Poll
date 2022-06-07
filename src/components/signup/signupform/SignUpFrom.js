@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import CreatePassword from "./CreatePassword";
 import EmailVerify from "./EmailVerify";
 import OtpVerify from "./OtpVerify";
@@ -8,13 +9,8 @@ const VERIFYOTP = "stepotp";
 const SETPASSWORD = "setpassword";
 
 export default function SignUpFrom() {
-  const [userEmail, setUserEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const newUser = { userEmail, password };
-  console.log(newUser);
-  console.log(userEmail);
-  console.log(password);
+  const [userEmail, setUserEmail] = useState(null);
+  const [password, setPassword] = useState(null);
 
   // ------ useState , useAuth --------
   const [userStatus, setUserStatus] = useState(INPUTEMAIL);
@@ -38,6 +34,6 @@ export default function SignUpFrom() {
   }
 
   if (userStatus === SETPASSWORD) {
-    return <CreatePassword setPassword={setPassword} />;
+    return <CreatePassword userEmail={userEmail} setPassword={setPassword} />;
   }
 }
