@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import { useAuth } from "../../contexts/AuthContext";
@@ -7,8 +7,9 @@ import { Menu } from "@headlessui/react";
 import { UserIcon, LogoutIcon, FolderIcon } from "@heroicons/react/outline";
 
 export default function Header() {
-  const { user, signOut } = useAuth();
-  const userName = user?.email?.split("@")[0];
+  const { user, signOut, userName } = useAuth();
+  // const [userName, setUserName] = useState("");
+  // const userName = user?.email?.split("@")[0];
 
   return (
     <div className="headerSticky">

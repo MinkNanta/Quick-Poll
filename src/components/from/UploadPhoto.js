@@ -4,23 +4,24 @@ import IconCircular from "../common/IconCircular";
 
 export default function UploadPhoto({
   detail,
-  scr,
+  value,
   onChange,
   onClose,
   classNameInput,
 }) {
   const uploadEL = useRef();
+  console.log(value);
 
   return (
     <>
       <div className=" py-4 flex justify-center items-center w-full ">
-        {scr ? (
+        {value ? (
           <div className="relative text-t_link flex flex-col justify-center items-center w-full cursor-pointer overflow-hidden rounded-lg hover:border hover:border-main h-96">
             <IconCircular onClick={onClose} absolute={true} />
 
             <img
               className="object-cover h-full w-full"
-              src={scr ? URL.createObjectURL(scr) : ""}
+              src={URL.createObjectURL(value)}
               alt="thumbnail"
             />
           </div>

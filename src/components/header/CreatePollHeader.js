@@ -9,7 +9,7 @@ export default function CreatePollHeader() {
   const { handleSubmitPoll } = usePoll();
 
   return (
-    <div className="headerSticky">
+    <div className="headerSticky z-30">
       <div className="headerContainer">
         <div className="my-auto">
           <Link to="/">

@@ -1,14 +1,14 @@
 import React from "react";
-import Skeleton from "./Skeleton";
 
-export default function CardImg({ img, loading }) {
-  //   console.log(card);
-
+export default function CardImg({ img }) {
   return (
     <>
-      {loading && <Skeleton />}
       <img
-        src={img}
+        src={
+          img
+            ? img
+            : "https://climate.onep.go.th/wp-content/uploads/2020/01/default-image.png"
+        }
         className="rounded-2xl object-cover w-full h-56"
         alt="poll"
       />

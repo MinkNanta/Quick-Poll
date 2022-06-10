@@ -11,6 +11,7 @@ import CreatePassword from "../components/signup/signupform/CreatePassword";
 import CreatePoll from "../pages/CreatePoll";
 import SharePoll from "../pages/feedback/SharePoll";
 import ViewPoll from "../pages/ViewPoll";
+import VoteQuestion from "../components/viewpoll/VoteQuestion";
 
 export default function Router() {
   return (
@@ -24,6 +25,7 @@ export default function Router() {
         <Route path="about" element={<AboutUs />} />
         <Route path="poll/completed/:id" element={<SharePoll />} />
         <Route path="poll/:id" element={<ViewPoll />} />
+        <Route path="poll/:id/questions" element={<VoteQuestion />} />
       </Route>
 
       <Route path="/poll/create" element={<CreatePoll />} />

@@ -15,7 +15,7 @@ export default function InputBigText({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className="w-full py-3 text-3xl bg-bg_sup focus:outline-none"
+        className="w-full py-3 text-5xl bg-bg_sup focus:outline-none"
       />
     </>
   );

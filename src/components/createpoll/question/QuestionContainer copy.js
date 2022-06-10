@@ -3,12 +3,9 @@ import { TrashIcon, ChevronDownIcon } from "@heroicons/react/outline";
 
 import UploadPhoto from "../../from/UploadPhoto";
 import { usePoll } from "../../../contexts/PollContext";
-import UploadIcon from "../../from/UploadPhotoIcon";
-import UploadPhotoIcon from "../../from/UploadPhotoIcon";
 
 export default function QuestionContainer({}) {
   const { questions, setQuestions, checkInput } = usePoll();
-  const [image, setImage] = useState(null);
 
   const handleAddMore = () => {
     const { shouldAddMore, checkTitle } = checkInput();
@@ -24,15 +21,15 @@ export default function QuestionContainer({}) {
         title: "",
         error_title: false,
         timeOut: "30",
-        question_pic: "",
-
         answers: [
           {
             optionTitle: "",
+            optionPic: "test",
             error_optionTitle: false,
           },
           {
             optionTitle: "",
+            optionPic: "test",
             error_optionTitle: false,
           },
         ],
@@ -56,22 +53,6 @@ export default function QuestionContainer({}) {
     // console.log(index, event.target.name);
     const values = [...questions];
     values[index].answers[indexOp][event.target.name] = event.target.value;
-    setQuestions(values);
-  };
-
-  const handleUploadPhoto = (index, event) => {
-    const values = [...questions];
-    if (event.target.files[0]) {
-      values[index].question_pic = event.target.files[0];
-      setQuestions(values);
-    } else {
-      console.log("error photo");
-    }
-  };
-
-  const handleRemovePhoto = (index, event) => {
-    const values = [...questions];
-    values[index].question_pic = null;
     setQuestions(values);
   };
 
@@ -108,29 +89,21 @@ export default function QuestionContainer({}) {
           {/* Background questions */}
           <div className="bg-bg_main p-8 rounded-2xl shadow-3xl">
             {/* Question title */}
-            <div className="relative">
-              <input
-                className="mainInput "
-                name="title"
-                value={inputField.title}
-                onChange={(event) => handleChangeInput(index, event)}
-                placeholder="Question?"
-              />
-              {inputField.error_title && (
-                <p className="text-danger text-xs pt-2">
-                  🔥 This question is require
-                </p>
-              )}
-              <UploadPhotoIcon
-                className="rounded-full w-12 h-12 flex justify-center items-center absolute top-1 right-2 hover:scale-110"
-                value={inputField.question_pic}
-                onClose={(event) => handleRemovePhoto(index, event)}
-                onChange={(event) => handleUploadPhoto(index, event)}
-              />
-            </div>
+            <input
+              className="mainInput"
+              name="title"
+              value={inputField.title}
+              onChange={(event) => handleChangeInput(index, event)}
+              placeholder="Enter the question here"
+            />
+            {inputField.error_title && (
+              <p className="text-danger text-xs pt-1">
+                🔥 This field is require
+              </p>
+            )}
 
             {/* Answer options */}
-            <div className="grid grid-cols-2 gap-x-8">
+            <div className="grid grid-cols-2 gap-x-8 pt-4">
               {inputField?.answers.map((inputAnswer, indexOp) => (
                 <div key={indexOp}>
                   <input
@@ -147,6 +120,10 @@ export default function QuestionContainer({}) {
                       🔥 This field is require
                     </p>
                   )}
+                  <UploadPhoto
+                    detail="SVG, PNG, JPG or GIF (MAX. 400x400px)"
+                    classNameInput="h-40"
+                  />
                 </div>
               ))}
             </div>

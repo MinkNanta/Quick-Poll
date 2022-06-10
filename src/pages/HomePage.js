@@ -12,7 +12,7 @@ function HomePage() {
   // const firstTime = true;
 
   return (
-    <div className="mainContainer box">
+    <div className="mainContainer">
       {firstTime && <Thankyou />}
       <HeroBanner />
       <Trending />

@@ -14,6 +14,12 @@ body {
   box-sizing: border-box;
 }
 
+textarea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* -------- container ------ */
 @layer base {
   h1 {
@@ -48,7 +54,7 @@ body {
 @layer components {
   /* --- Container */
   .box {
-    /* @apply border border-t_main; */
+    @apply border border-t_main;
   }
 
   .mainContainer {

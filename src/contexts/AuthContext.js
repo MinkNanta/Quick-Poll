@@ -12,6 +12,7 @@ const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [userName, setUserName] = useState(null);
   const { error, setError } = useError();
 
   useEffect(() => {
@@ -20,6 +21,7 @@ function AuthContextProvider({ children }) {
         const token = getAccessToken();
         if (token) {
           const res = await axios.get("/");
+          setUserName(res.data.user.email.split("@")[0]);
           setUser(res.data.user);
         }
       } catch (error) {
@@ -28,11 +30,12 @@ function AuthContextProvider({ children }) {
       }
     };
     fetchUser();
-  }, []);
+  }, [user]);
 
   const signUp = async (body) => {
     try {
       const res = await axios.post("/signup", body);
+      // setUserName(user?.email?.split("@")[0]);
       setAccessToken(res.data.token);
       setUser(res.data.token);
     } catch (error) {
@@ -45,12 +48,15 @@ function AuthContextProvider({ children }) {
     try {
       const res = await axios.get(`/signup?email=${email}`);
       return res.data.user.email;
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const signIn = async (body) => {
     try {
       const res = await axios.post("/signin", body);
+      // setUserName(user?.email?.split("@")[0]);
       setAccessToken(res.data.token);
       setUser(res.data.token);
     } catch (error) {
@@ -72,6 +78,7 @@ function AuthContextProvider({ children }) {
         signOut,
         signIn,
         findByEmail,
+        userName,
       }}
     >
       {children}

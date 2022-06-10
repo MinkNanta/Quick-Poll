@@ -6,40 +6,42 @@ import { useNavigate } from "react-router";
 const PollContext = createContext();
 
 function PollContextProvider({ children }) {
+  // const [pollImg, setPollImg] = useState(null);
   const [pollTitle, setPollTitle] = useState("");
-  const [pollImg, setPollImg] = useState("testPic");
-  const [error, setError] = useState(false);
-  const [pollUrl, setPollUrl] = useState("");
-  const navigate = useNavigate();
+  const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  const [error, setError] = useState(false);
+  const navigate = useNavigate();
   const [poll, setPoll] = useState([]);
   const [pollById, setPollById] = useState([]);
-
   const [questions, setQuestions] = useState([
     {
       title: "",
       error_title: false,
-      timeOut: "120",
+      timeOut: "30",
+      question_pic: "",
       answers: [
         {
           optionTitle: "",
-          optionPic: "test",
           error_optionTitle: false,
         },
         {
           optionTitle: "",
-          optionPic: "test",
           error_optionTitle: false,
         },
       ],
     },
   ]);
+  console.log(questions);
 
   const getPoll = async () => {
     try {
       const res = await axios.get("/poll");
       setPoll(res.data);
+      setLoading(false);
     } catch (error) {
+      setLoading(true);
       console.log(error);
     }
   };
@@ -47,9 +49,8 @@ function PollContextProvider({ children }) {
   const getPollById = async (id) => {
     try {
       const res = await axios.get(`/poll/${id}`);
-      console.log(id);
-      console.log(res.data);
       setPollById(res.data);
+      return res.data;
     } catch (error) {
       console.log(error);
     }
@@ -83,22 +84,48 @@ function PollContextProvider({ children }) {
     return { shouldAddMore, checkTitle };
   };
 
+  // console.log(formData);
+
   const handleSubmitPoll = async () => {
     try {
       checkInput();
-      if (pollTitle === "") {
+      if (!pollTitle) {
         return setError(true);
       }
+      const formData = new FormData();
+      formData.append("pollTitle", pollTitle);
+      formData.append("image", image);
 
-      const body = { pollTitle, pollImg, questions };
-      console.log(body);
-      const res = await axios.post("/poll/create", body);
-      // console.log(res.data);
-      // console.log(res.data.id);
-      // setPollUrl(res.data.id);
+      for (let i = 0; i < questions.answers?.length; i++) {
+        formData.append(`questionPic_${i}`, questions.question_pic);
+      }
+      formData.append("questions", JSON.stringify(questions));
+
+      // for (let pair of formData.entries()) {
+      //   console.log(pair[0] + "," + pair[1]);
+      // }
+      const res = await axios.post("/poll/create", formData);
 
       console.log(res.data.id);
-      navigate(`/poll/completed/${res.data.id}`);
+      // navigate(`/poll/completed/${res.data.id}`);
+      // setImage(null);
+      // setPollTitle("");
+      // setQuestions({
+      //   title: "",
+      //   error_title: false,
+      //   timeOut: "30",
+      //   question_pic: "",
+      //   answers: [
+      //     {
+      //       optionTitle: "",
+      //       error_optionTitle: false,
+      //     },
+      //     {
+      //       optionTitle: "",
+      //       error_optionTitle: false,
+      //     },
+      //   ],
+      // });
     } catch (error) {
       console.log(error);
     }
@@ -109,8 +136,6 @@ function PollContextProvider({ children }) {
       value={{
         questions,
         setQuestions,
-        pollTitle,
-        setPollTitle,
         handleSubmitPoll,
         error,
         setError,
@@ -119,6 +144,11 @@ function PollContextProvider({ children }) {
         poll,
         getPollById,
         pollById,
+        pollTitle,
+        setPollTitle,
+        image,
+        setImage,
+        loading,
       }}
     >
       {children}
