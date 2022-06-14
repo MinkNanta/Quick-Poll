@@ -33,7 +33,6 @@ function PollContextProvider({ children }) {
       ],
     },
   ]);
-  console.log(questions);
 
   const getPoll = async () => {
     try {
@@ -88,6 +87,7 @@ function PollContextProvider({ children }) {
 
   const handleSubmitPoll = async () => {
     try {
+      console.log("submit");
       checkInput();
       if (!pollTitle) {
         return setError(true);
@@ -96,36 +96,35 @@ function PollContextProvider({ children }) {
       formData.append("pollTitle", pollTitle);
       formData.append("image", image);
 
-      for (let i = 0; i < questions.answers?.length; i++) {
-        formData.append(`questionPic_${i}`, questions.question_pic);
+      let i = 1;
+      for (const file of questions) {
+        formData.append(`questionPic_${i}`, file.question_pic);
+        i++;
       }
       formData.append("questions", JSON.stringify(questions));
 
-      // for (let pair of formData.entries()) {
-      //   console.log(pair[0] + "," + pair[1]);
-      // }
       const res = await axios.post("/poll/create", formData);
+      console.log(res.data);
+      navigate(`/poll/completed/${res.data.id}`);
+      setImage(null);
+      setPollTitle("");
+      setQuestions({
+        title: "",
+        error_title: false,
+        timeOut: "30",
 
-      console.log(res.data.id);
-      // navigate(`/poll/completed/${res.data.id}`);
-      // setImage(null);
-      // setPollTitle("");
-      // setQuestions({
-      //   title: "",
-      //   error_title: false,
-      //   timeOut: "30",
-      //   question_pic: "",
-      //   answers: [
-      //     {
-      //       optionTitle: "",
-      //       error_optionTitle: false,
-      //     },
-      //     {
-      //       optionTitle: "",
-      //       error_optionTitle: false,
-      //     },
-      //   ],
-      // });
+        question_pic: "",
+        answers: [
+          {
+            optionTitle: "",
+            error_optionTitle: false,
+          },
+          {
+            optionTitle: "",
+            error_optionTitle: false,
+          },
+        ],
+      });
     } catch (error) {
       console.log(error);
     }

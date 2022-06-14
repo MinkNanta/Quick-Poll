@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import { useAuth } from "../../contexts/AuthContext";
 import ProfilePic from "../common/ProfilePic";
@@ -8,8 +8,8 @@ import { UserIcon, LogoutIcon, FolderIcon } from "@heroicons/react/outline";
 
 export default function Header() {
   const { user, signOut, userName } = useAuth();
-  // const [userName, setUserName] = useState("");
-  // const userName = user?.email?.split("@")[0];
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="headerSticky">
@@ -50,40 +50,47 @@ export default function Header() {
               <div className="flex gap-4 justify-end relative">
                 <Menu>
                   <Menu.Button>
-                    <div className="flex gap-2 justify-end items-center bg-main px-4 py-2 text-base  text-t_link rounded-2xl hover:text-t_link hover:bg-buttonHover cursor-pointer">
+                    <div
+                      className="flex gap-2 justify-end items-center bg-main px-4 py-2 text-base  text-t_link rounded-2xl hover:text-t_link hover:bg-buttonHover cursor-pointer"
+                      onClick={() => setOpen(true)}
+                    >
                       <ProfilePic />
                       <p className="">{userName}</p>
                     </div>
                   </Menu.Button>
 
                   <div className="absolute top-12 right-0 ">
-                    <Menu.Items className="bg-bg_main w-40 border border-main rounded-xl p-4 text-left space-y-4">
-                      <Link
-                        className="menuItem inline-flex space-x-2"
-                        to="/profile"
-                      >
-                        <UserIcon className="w-5" />
-                        <span>Profile</span>
-                      </Link>
-                      <Link
-                        className="menuItem inline-flex space-x-2"
-                        to="/MyPoll"
-                      >
-                        <FolderIcon className="w-5" />
-                        <span>My Poll</span>
-                      </Link>
-                      <p
-                        className="menuItem inline-flex space-x-2"
-                        onClick={signOut}
-                      >
-                        <LogoutIcon className="w-5" />
-                        <span>Sign out</span>
-                      </p>
-                    </Menu.Items>
+                    {open && (
+                      <Menu.Items className="bg-bg_main w-40 border border-main rounded-xl p-4 text-left space-y-4">
+                        <>
+                          <Link
+                            className="menuItem inline-flex space-x-2"
+                            to="/profile"
+                            onClick={() => setOpen(false)}
+                          >
+                            <UserIcon className="w-5" />
+                            <span>Profile</span>
+                          </Link>
+                          <Link
+                            className="menuItem inline-flex space-x-2"
+                            to="/MyPoll"
+                            onClick={() => setOpen(false)}
+                          >
+                            <FolderIcon className="w-5" />
+                            <span>My Poll</span>
+                          </Link>
+                          <button
+                            className="menuItem inline-flex space-x-2"
+                            onClick={signOut}
+                          >
+                            <LogoutIcon className="w-5" />
+                            <span>Sign out</span>
+                          </button>
+                        </>
+                      </Menu.Items>
+                    )}
                   </div>
                 </Menu>
-
-                {/*  */}
               </div>
             </>
           )}

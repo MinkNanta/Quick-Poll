@@ -39,7 +39,7 @@ export default function CardItem() {
         poll.slice(0, 20).map((el) => (
           <>
             <div
-              key={el.id}
+              key={`home${el.id}`}
               className="space-y-2 cursor-pointer"
               onClick={() => navigate(`/poll/${el.id}`)}
             >

@@ -7,9 +7,9 @@ function HeroBanner() {
   const navigate = useNavigate();
   return (
     <div className="py-12 ">
-      <div className="bannerContainer ">
-        <div className="p-12">
-          <h1 className="text-5xl font-semibold">
+      <div className="bannerContainer relative ">
+        <div className="p-4 px-9">
+          <h1 className=" font-semibold">
             The best way to prove
             <br />
             <span className="text-t_link">your design ideas</span>
@@ -24,8 +24,8 @@ function HeroBanner() {
             Make A Quick Poll
           </button>
         </div>
-        <div className="mx-auto p-4">
-          <img src={img} alt="pool-poll"></img>
+        <div className="mx-auto p-4 absolute -bottom-4 right-0">
+          <img src={img} alt="pool-poll" className=""></img>
         </div>
       </div>
     </div>

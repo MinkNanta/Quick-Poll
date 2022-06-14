@@ -48,12 +48,12 @@ export default function EmailVerify({ setUserStatus, setUserEmail }) {
         <SubmitButton onClick={handleSubmitEmail}>Create Account</SubmitButton>
       </Form>
       <AuthServices />
-      <h6 className="text-center">
+      <p className="text-center">
         Already have an account?
         <Link className="text-blue_sup" to="/signIn">
           sign in
         </Link>
-      </h6>
+      </p>
     </>
   );
 }

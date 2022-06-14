@@ -12,8 +12,14 @@ import CreatePoll from "../pages/CreatePoll";
 import SharePoll from "../pages/feedback/SharePoll";
 import ViewPoll from "../pages/ViewPoll";
 import VoteQuestion from "../components/viewpoll/VoteQuestion";
+import Profile from "../pages/Profile";
+import MyPoll from "../pages/MyPoll";
+import { useAuth } from "../contexts/AuthContext";
+import PollDetail from "../pages/PollDetail";
 
 export default function Router() {
+  const { user } = useAuth();
+  console.log(user);
   return (
     <Routes>
       <Route path="/" element={<MenuLayout />}>
@@ -23,9 +29,16 @@ export default function Router() {
         <Route path="Pricing" element={<Pricing />} />
         <Route path="Explore" element={<Explore />} />
         <Route path="about" element={<AboutUs />} />
-        <Route path="poll/completed/:id" element={<SharePoll />} />
         <Route path="poll/:id" element={<ViewPoll />} />
         <Route path="poll/:id/questions" element={<VoteQuestion />} />
+        <Route path="poll/completed/:id" element={<SharePoll />} />
+        {user && (
+          <>
+            <Route path="profile" element={<Profile />} />
+            <Route path="myPoll" element={<MyPoll />} />
+            <Route path="pollDetail/:id" element={<PollDetail />} />
+          </>
+        )}
       </Route>
 
       <Route path="/poll/create" element={<CreatePoll />} />

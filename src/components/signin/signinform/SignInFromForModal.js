@@ -7,7 +7,7 @@ import InputYup from "../../from/InputYup";
 import SubmitButton from "../../from/SubmitButton";
 import * as yup from "yup";
 
-export default function SignInFrom() {
+export default function SignInFromForModal({ setOpen }) {
   const { signIn } = useAuth();
   const navigate = useNavigate();
 
@@ -20,15 +20,15 @@ export default function SignInFrom() {
     try {
       const body = { email: email, password: password };
       await signIn(body);
-      navigate("/");
+      setOpen(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <>
-      <h2 className="bigTitle">So glad you're here!</h2>
+    <div className="text-left space-y-4">
+      <h2>Please login</h2>
 
       <Form schema={isEmail} className="flex flex-col gap-y-6">
         <InputYup
@@ -45,13 +45,14 @@ export default function SignInFrom() {
         />
         <SubmitButton onClick={handleSubmitSignIn}>Sign in</SubmitButton>
       </Form>
-
-      <Link
-        to="/resetpassword"
-        className="text-[14px] text-t_support opacity-60 hover:opacity-80"
-      >
-        Reset password
-      </Link>
+      <div className="pt-2">
+        <Link
+          to="/resetpassword"
+          className="text-[14px] text-t_support opacity-60 hover:opacity-80"
+        >
+          Reset password
+        </Link>
+      </div>
       <AuthServices />
       <p className="text-center">
         Don’t have account?{" "}
@@ -60,6 +61,6 @@ export default function SignInFrom() {
           sign up{" "}
         </Link>
       </p>
-    </>
+    </div>
   );
 }

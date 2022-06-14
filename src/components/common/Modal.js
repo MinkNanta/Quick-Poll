@@ -3,10 +3,18 @@ import { Dialog, Transition } from "@headlessui/react";
 import IconCircular from "./IconCircular";
 import { useNavigate } from "react-router";
 
-export default function Modal({ title, detail, icon, button, onClose, open }) {
+export default function Modal({
+  title,
+  detail,
+  icon,
+  button,
+  onClose,
+  open,
+  div,
+}) {
   return (
     <Transition.Root show={open}>
-      <Dialog as="div" className="z-10" onClose={onClose}>
+      <Dialog as="div" className="z-80" onClose={onClose}>
         <Transition.Child
           enter="ease-out duration-300"
           enterFrom="opacity-0"
@@ -18,7 +26,7 @@ export default function Modal({ title, detail, icon, button, onClose, open }) {
           <div className="fixed inset-0 transition-opacity bg-t_label" />
         </Transition.Child>
 
-        <div className="fixed z-10 inset-0 flex">
+        <div className="fixed z-80 inset-0 flex">
           <div className="bg-bg_main rounded-xl shadow-2xl  max-w-lg mx-auto self-center grow p-2">
             <Transition.Child
               enter="ease-out duration-300"
@@ -33,6 +41,7 @@ export default function Modal({ title, detail, icon, button, onClose, open }) {
                 <h2>{icon}</h2>
                 <h2>{title}</h2>
                 <p>{detail}</p>
+                <div className="overflow-scroll max-h-96">{div}</div>
                 {button}
               </Dialog.Panel>
             </Transition.Child>

@@ -6,14 +6,16 @@ import {
 } from "../sevices/localStorage";
 import axios from "../config/axios";
 import { useError } from "./ErrorContext";
-import { Navigate } from "react-router";
+import { useNavigate } from "react-router";
 
 const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [fetch, setFetch] = useState(false);
   const [userName, setUserName] = useState(null);
   const { error, setError } = useError();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -23,14 +25,18 @@ function AuthContextProvider({ children }) {
           const res = await axios.get("/");
           setUserName(res.data.user.email.split("@")[0]);
           setUser(res.data.user);
+        } else {
+          setUser(null);
         }
       } catch (error) {
         removeAccessToken();
-        Navigate("/");
+        navigate("/");
       }
     };
     fetchUser();
-  }, [user]);
+  }, [fetch]);
+
+  console.log(user);
 
   const signUp = async (body) => {
     try {
@@ -38,6 +44,7 @@ function AuthContextProvider({ children }) {
       // setUserName(user?.email?.split("@")[0]);
       setAccessToken(res.data.token);
       setUser(res.data.token);
+      setFetch((p) => !p);
     } catch (error) {
       console.log(error);
       setError(error.message);
@@ -58,6 +65,7 @@ function AuthContextProvider({ children }) {
       const res = await axios.post("/signin", body);
       // setUserName(user?.email?.split("@")[0]);
       setAccessToken(res.data.token);
+      setFetch((p) => !p);
       setUser(res.data.token);
     } catch (error) {
       setError(error.message);
@@ -67,6 +75,7 @@ function AuthContextProvider({ children }) {
   const signOut = () => {
     removeAccessToken();
     setUser(null);
+    navigate("/");
   };
 
   return (

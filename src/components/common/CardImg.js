@@ -9,7 +9,7 @@ export default function CardImg({ img }) {
             ? img
             : "https://climate.onep.go.th/wp-content/uploads/2020/01/default-image.png"
         }
-        className="rounded-2xl object-cover w-full h-56"
+        className="rounded-2xl object-cover w-full h-48"
         alt="poll"
       />
     </>

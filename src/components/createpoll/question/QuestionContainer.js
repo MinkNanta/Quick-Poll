@@ -39,6 +39,8 @@ export default function QuestionContainer({}) {
       },
     ]);
   };
+
+  console.log(questions);
   const handleRemove = (index) => {
     const values = [...questions];
     values.splice(index, 1);
@@ -77,7 +79,7 @@ export default function QuestionContainer({}) {
 
   return (
     <div className="space-y-6 pt-4 pb-36">
-      {questions.map((inputField, index) => (
+      {questions?.map((inputField, index) => (
         <div key={index} className="space-y-5">
           <div className="flex justify-between">
             {/* questions heder */}
@@ -106,7 +108,7 @@ export default function QuestionContainer({}) {
           </div>
 
           {/* Background questions */}
-          <div className="bg-bg_main p-8 rounded-2xl shadow-3xl">
+          <div className="bg-bg_main p-8 rounded-2xl shadow-2xl border-main">
             {/* Question title */}
             <div className="relative">
               <input
