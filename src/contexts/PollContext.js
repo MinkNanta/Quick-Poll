@@ -92,6 +92,9 @@ function PollContextProvider({ children }) {
       if (!pollTitle) {
         return setError(true);
       }
+
+      setLoading(true);
+
       const formData = new FormData();
       formData.append("pollTitle", pollTitle);
       formData.append("image", image);
@@ -108,23 +111,25 @@ function PollContextProvider({ children }) {
       navigate(`/poll/completed/${res.data.id}`);
       setImage(null);
       setPollTitle("");
-      setQuestions({
-        title: "",
-        error_title: false,
-        timeOut: "30",
+      setQuestions([
+        {
+          title: "",
+          error_title: false,
+          timeOut: "30",
 
-        question_pic: "",
-        answers: [
-          {
-            optionTitle: "",
-            error_optionTitle: false,
-          },
-          {
-            optionTitle: "",
-            error_optionTitle: false,
-          },
-        ],
-      });
+          question_pic: "",
+          answers: [
+            {
+              optionTitle: "",
+              error_optionTitle: false,
+            },
+            {
+              optionTitle: "",
+              error_optionTitle: false,
+            },
+          ],
+        },
+      ]);
     } catch (error) {
       console.log(error);
     }

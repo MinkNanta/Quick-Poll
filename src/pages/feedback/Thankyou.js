@@ -13,7 +13,7 @@ export default function Thankyou() {
       title="Account now created!"
       icon="🎉🎊✨"
       button={
-        <button className="primaryMd" onClick={() => navigator("/profile/:id")}>
+        <button className="primaryMd" onClick={() => navigator("/profile")}>
           See my profile
         </button>
       }

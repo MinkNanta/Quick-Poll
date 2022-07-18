@@ -58,7 +58,7 @@ export default function QuestionContainer({}) {
 
   return (
     <div className="space-y-6 pt-4 pb-36">
-      {questions.map((inputField, index) => (
+      {questions?.map((inputField, index) => (
         <div key={index} className="space-y-5">
           <div className="flex justify-between">
             {/* questions heder */}

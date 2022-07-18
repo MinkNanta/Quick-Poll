@@ -27,7 +27,9 @@ export function VoteContextProvider({ children }) {
 
   const getVoteById = async (userId) => {
     try {
+      console.log(userId);
       const res = await axios.get(`/vote/user/${userId}`);
+      console.log(res);
       return res.data;
     } catch (error) {
       console.log(error);

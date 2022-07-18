@@ -8,7 +8,7 @@ import SubmitButton from "../../from/SubmitButton";
 import * as yup from "yup";
 
 export default function SignInFrom() {
-  const { signIn } = useAuth();
+  const { signIn, error } = useAuth();
   const navigate = useNavigate();
 
   const isEmail = yup.object({
@@ -20,7 +20,6 @@ export default function SignInFrom() {
     try {
       const body = { email: email, password: password };
       await signIn(body);
-      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -28,8 +27,7 @@ export default function SignInFrom() {
 
   return (
     <>
-      <h2 className="bigTitle">So glad you're here!</h2>
-
+      <h2 className="bigTitle">So glad you're here!</h2>{" "}
       <Form schema={isEmail} className="flex flex-col gap-y-6">
         <InputYup
           name="email"
@@ -37,15 +35,19 @@ export default function SignInFrom() {
           label="Email"
           placeholder="Enter your email"
         />
+
         <InputYup
           name="password"
           type="password"
           label="Password"
           placeholder="Enter your password"
         />
+        {error && (
+          <p className="pt-1 text-[14px] leading-5 text-danger">{error}</p>
+        )}
+
         <SubmitButton onClick={handleSubmitSignIn}>Sign in</SubmitButton>
       </Form>
-
       <Link
         to="/resetpassword"
         className="text-[14px] text-t_support opacity-60 hover:opacity-80"

@@ -40,7 +40,6 @@ export default function QuestionContainer({}) {
     ]);
   };
 
-  console.log(questions);
   const handleRemove = (index) => {
     const values = [...questions];
     values.splice(index, 1);

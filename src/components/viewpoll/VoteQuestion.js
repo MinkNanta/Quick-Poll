@@ -8,15 +8,17 @@ import Modal from "../common/Modal";
 import SignInContainer from "../signin/SignInContainer";
 import SignInFrom from "../signin/signinform/SignInFrom";
 import SignInFromForModal from "../signin/signinform/SignInFromForModal";
-import Votebody from "./Votebody";
+import { CheckCircleIcon } from "@heroicons/react/outline";
 
 export default function VoteQuestion() {
   const [ques, setQues] = useState(null);
+  const [voteResult, setVoteResult] = useState(null);
   const [open, setOpen] = useState(false);
   const [fetch, setFetch] = useState(false);
+  const [result, setResult] = useState(false);
 
   const { getPollById } = usePoll();
-  const { vote, createVote, setVote, getVote } = useVote();
+  const { vote, createVote, setVote, getVote, getVoteById } = useVote();
   const [index, setIndex] = useState(0);
   const { id } = useParams();
   const { user } = useAuth();
@@ -26,6 +28,18 @@ export default function VoteQuestion() {
       try {
         const res = await getPollById(id);
         setQues(res);
+        console.log(res);
+        console.log(user.id);
+        setResult(true);
+
+        // const userVoted = await getVoteById(user.id);
+        // if (userVoted) {
+        //   setResult(true);
+        // }
+        // setVoteResult(userVoted);
+        // const votes = await getVote(questionId);
+
+        // console.log(userVoted);
       } catch (error) {
         console.log(error.message);
       }
@@ -43,9 +57,7 @@ export default function VoteQuestion() {
       }
 
       const voted = await votes.map((el) => el.userId === user.id);
-      console.log(user.id);
-      console.log(voted);
-      console.log(voted.indexOf(true));
+      // setResult(true);
 
       if (voted.indexOf(true) >= 0) {
         console.log("you already voted");
@@ -114,10 +126,29 @@ export default function VoteQuestion() {
                     >
                       {ans.title}
                     </button>
-
-                    <button className="border-main bg-bg_sup py-5 px-6 rounded-3xl hover:bg-buttonHover text-t_main text-left w-full ">
-                      {ans.Votes?.map((vote, idx) => vote.userId)}
-                    </button>
+                    {ans.Votes?.map((vote, idx) =>
+                      vote.userId === user.id ? (
+                        <>
+                          <div>
+                            {/* <div className="bg-main h-3 w-full mt-4 rounded-3xl">
+                              <div
+                                className={`bg-success h-3 w-[${
+                                  ans.Votes?.length / 100
+                                }] mt-4 rounded-3xl`}
+                              ></div>
+                            </div> */}
+                            <p className="flex gap-1 mt-1 text-success justify-items-center items-center ml-1">
+                              <span>
+                                <CheckCircleIcon className="w-4 h-4 inline" />
+                              </span>
+                              Voted
+                            </p>
+                          </div>
+                        </>
+                      ) : (
+                        <div></div>
+                      )
+                    )}
                   </div>
                 ))}
               </div>

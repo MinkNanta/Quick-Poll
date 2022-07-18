@@ -3,6 +3,7 @@ module.exports = {
   theme: {
     screens: {
       sm: { max: "640px" },
+      xl: { max: "1200px" },
     },
 
     fontSize: {
@@ -29,7 +30,7 @@ module.exports = {
       t_link: "#5248B5",
       line: "rgba(247, 245, 250, 1)",
       blue_sup: "#2093FD",
-      success: "#6BCA85",
+      success: "#778A35",
       danger: "#CF3881",
       buttonHover: "rgba(82, 72, 181, 0.1)",
       dark: "#181A2E",

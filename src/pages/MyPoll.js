@@ -41,7 +41,7 @@ export default function MyPoll() {
   console.log(myVote);
 
   return (
-    <div className="mainContainer py-16">
+    <div className="mainContainer py-8">
       <div className="space-y-4">
         <div className="flex gap-2">
           <a href="/" className="text-t_support">
@@ -124,7 +124,7 @@ export default function MyPoll() {
               <div
                 key={el.id}
                 className="space-y-2 cursor-pointer"
-                onClick={() => navigate(`/poll/${el.id}`)}
+                onClick={() => navigate(`/pollDetail/${el.id}`)}
               >
                 <CardImg img={el?.pollImg} />
                 <h6>{el.title}</h6>
@@ -133,19 +133,17 @@ export default function MyPoll() {
           ) : (
             <div className="py-20 w-full col-span-12 text-center space-y-3">
               <h3>Your don't have any Voted</h3>
-              <p className="text-t_support">
-                Choose category > Write your questions > Share your poll
-              </p>
+              <p className="text-t_support">Let's vote some poll</p>
               <div>
-                <Link className="text-t_link" to="/poll/create">
-                  Make A Quick Vote
+                <Link className="text-t_link" to="/">
+                  Explore poll
                 </Link>
               </div>
             </div>
           )}
         </div>
       )}
-      <div className="mt-24">
+      <div className="my-24">
         <Banner
           title="Upgrade your plan"
           span=""

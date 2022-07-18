@@ -2,13 +2,16 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { usePoll } from "../../contexts/PollContext";
+import { useAuth } from "../../contexts/AuthContext.js";
 import { timeSince } from "../../sevices/dateFormat";
 
 export default function ViewPollContainer() {
   const { pollById, getPollById } = usePoll();
   const { id } = useParams();
+  const { user, userName } = useAuth();
 
   console.log(pollById);
+  console.log(user);
 
   useEffect(() => {
     const fetchCard = async () => {
@@ -23,8 +26,8 @@ export default function ViewPollContainer() {
   return (
     <div className="max-w-2xl space-y-4 text-center mx-auto py-32">
       <h6>
-        {pollById?.userId ? pollById?.userId : "Some one "} • Create{" "}
-        {timeSince(pollById.createdAt)} • {pollById.Questions?.length} Questions
+        Poll by {userName} • Create {timeSince(pollById.createdAt)} ago •{" "}
+        {pollById.Questions?.length} Questions
       </h6>
       <h2>{pollById.title}</h2>
       {pollById?.pollImg && (

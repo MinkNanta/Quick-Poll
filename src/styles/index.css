@@ -14,6 +14,7 @@ body {
   font-family: poppins, Prompt;
   background-color: var(--background-color);
   box-sizing: border-box;
+  color: #070a39;
 }
 
 /* -------- container ------ */
@@ -112,7 +113,7 @@ body {
 
   /* ------- input styles */
   .mainInput {
-    @apply bg-bg_sup w-full border-none px-4 py-4 text-t_support rounded-2xl border border-main  focus:outline-1 focus:text-t_main focus:outline-main;
+    @apply bg-bg_sup w-full border-none px-4 py-4 text-t_support rounded-2xl border border-main  focus:outline-1 focus:text-t_main focus:outline-main disabled:text-t_label;
   }
 
   .inputLabel {

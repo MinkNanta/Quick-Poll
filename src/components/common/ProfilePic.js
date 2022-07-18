@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuth } from "../../contexts/AuthContext";
 
-export default function ProfilePic() {
+export default function ProfilePic({ className }) {
   const { user, userName } = useAuth();
 
   return (

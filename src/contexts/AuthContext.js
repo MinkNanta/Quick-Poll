@@ -14,7 +14,7 @@ function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const [fetch, setFetch] = useState(false);
   const [userName, setUserName] = useState(null);
-  const { error, setError } = useError();
+  const { error, setError } = useError("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -67,8 +67,9 @@ function AuthContextProvider({ children }) {
       setAccessToken(res.data.token);
       setFetch((p) => !p);
       setUser(res.data.token);
+      navigate("/");
     } catch (error) {
-      setError(error.message);
+      setError("Invalid email or password");
     }
   };
 
@@ -88,6 +89,7 @@ function AuthContextProvider({ children }) {
         signIn,
         findByEmail,
         userName,
+        error,
       }}
     >
       {children}
